@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.tictactoe.viewmodel.GameViewModel
 
 @Composable
-fun TicTacTowGame(viewModel: GameViewModel) {
+fun TicTacToeGame(viewModel: GameViewModel) {
 
 // 1. Get the haptic feedback handler
     val haptic = LocalHapticFeedback.current

@@ -5,14 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.tictactoe.gameui.TicTacTowGame
+import com.example.tictactoe.gameui.TicTacToeGame
 import com.example.tictactoe.ui.theme.TicTacToeTheme
 import com.example.tictactoe.viewmodel.GameViewModel
 
@@ -33,7 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TicTacToeTheme {
-                TicTacTowGame(viewModel)
+                TicTacToeGame(viewModel)
             }
         }
     }
