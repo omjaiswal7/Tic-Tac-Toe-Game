@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -17,15 +16,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tictactoe.viewmodel.GameViewModel
-import kotlin.math.min
 
 @Composable
 fun TicTacTowGame(viewModel: GameViewModel) {
+
+// 1. Get the haptic feedback handler
+    val haptic = LocalHapticFeedback.current
 
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val sidePadding = (screenWidth * 0.06f).coerceIn(16.dp, 32.dp)
@@ -61,12 +64,16 @@ fun TicTacTowGame(viewModel: GameViewModel) {
             board = viewModel.board,
             winningCells = viewModel.winningCells,
             onCellClick = { r, c ->
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 viewModel.makeMove(r, c)
             }
         )
 
         Button(
-            onClick = { viewModel.restartGame() },
+            onClick = {
+                viewModel.restartGame()
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+            },
             modifier = Modifier
                 .widthIn(max = 280.dp)
                 .fillMaxWidth()
